@@ -1,9 +1,9 @@
 on: [push, pull_request]
 
-name: Test bun-router
+name: Run bun-router unit tests
 jobs:
   build:
-    name: build-app
+    name: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
