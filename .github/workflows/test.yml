@@ -1,6 +1,6 @@
 on: [push, pull_request]
 
-name: Run bun-router unit tests
+name: Unit tests
 jobs:
   build:
     name: test
