@@ -1,5 +1,9 @@
 # bun-router
 
+![GitHub package.json version (branch)](https://img.shields.io/github/package-json/v/esyfyi/bun-router/main)
+![Unit tests](https://github.com/esyfyi/bun-router/actions/workflows/test.yml/badge.svg?branch=main)
+![License](https://img.shields.io/github/license/esyfyi/bun-router)
+
 A simple HTTP router for [Bun.serve](https://bun.sh/docs/api/http#bun-serve).
 
 ## 🚀 Usage
