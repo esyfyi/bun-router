@@ -3,6 +3,9 @@
 A simple HTTP router for [Bun.serve](https://bun.sh/docs/api/http#bun-serve).
 
 ## 🚀 Usage
+```sh
+$ bun install git@github.com:esyfyi/bun-router.git
+```
 
 ```ts
 import { Router } from "bun-router";
