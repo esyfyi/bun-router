@@ -1,12 +1,8 @@
-export interface Route {
-  name: string;
-  method: string;
-  path: string;
-  action: (request: Request) => Response;
-}
+import { RouteMap } from "./route-map";
+import { Route } from "./route";
 
 export class Router {
-  private routes: Route[] = [];
+  private routes: RouteMap = new RouteMap();
 
   public verbose;
   public notFoundRoute: Route = {
@@ -16,6 +12,7 @@ export class Router {
     action(request) {
       return new Response("", { status: 404, statusText: "Not Found" });
     },
+    parameters: new Map(),
   };
 
   constructor(verbose: boolean = false) {
@@ -23,36 +20,24 @@ export class Router {
   }
 
   add(route: Route) {
-    this.routes.push(route);
+    this.routes.add(route);
 
     if (this.verbose) {
       console.log(`🛫 Route "${route.name}" [${route.method}] '${route.path}' added.`);
     }
   }
 
-  remove(name: string) {
-    const route = this.routes.find(route => {
-      return route.name === name;
-    });
-
-    if (!route) {
-      throw new Error(`Route "${name}" does not exist.`);
-    }
+  remove(path: string) {
+    this.routes.remove(path);
 
     if (this.verbose) {
-      console.log(`🛬 Route "${route.name}" [${route.method}] '${route.path}' removed.`);
+      console.log(`🛬 Route "${path}' removed.`);
     }
-    this.routes = this.routes.filter(route => {
-      return route.name !== name;
-    });
   }
 
   route(request: Request): Response {
     const url = new URL(request.url);
-
-    let route = this.routes.find(route => {
-      return route.method === request.method && route.path === url.pathname;
-    });
+    let route = this.routes.get(url.pathname);
 
     if (!route) {
       route = this.notFoundRoute;
